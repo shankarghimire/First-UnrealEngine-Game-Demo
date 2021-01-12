@@ -1,12 +1,14 @@
 #include<iostream>
-
-int main()
+using namespace std;
+void PrintIntroduction(int Difficulty)
 {
-    std::cout << "Hello World!\n";
-    std::cout << "You are a secret agent breaking into a secure server room";
-    std::cout << std::endl;
-    std::cout << "You need to enter the correct codes to continue..." << std::endl;
-    
+    cout << "\n\nYou are a secret agent breaking into a level  " << Difficulty << " secure server room...\n";
+    std::cout << "You need to enter the correct codes to continue...\n\n" ;
+}
+bool PlayGame( int LevelDifficulty)
+{
+  
+    PrintIntroduction(LevelDifficulty);
     //Declareing 3 codes
     const int CodeA = 4;
     const int CodeB = 3;
@@ -17,17 +19,15 @@ int main()
     int CodeProduct = CodeA * CodeB * CodeC;
 
     std::cout << std::endl;
-    std::cout << "+ There are 3 numbers in the codes : " << std::endl;
-    std::cout << "+ The codes add up to : " << CodeSum << std::endl;
-    std::cout << "+ The codes multiply to give : " << CodeProduct << std::endl;
-
+    std::cout << "+ There are 3 numbers in the codes : " ;
+    std::cout << "\n+ The codes add up to : " << CodeSum ;
+    std::cout << "\n+ The codes multiply to give : " << CodeProduct  << "\n" ;
+    // std::cout << "\n";
     int GuessA, GuessB, GuessC;
 
-    std::cin >> GuessA;
-    std::cin >> GuessB;
-    std::cin >> GuessC;
+    std::cin >> GuessA >> GuessB >> GuessC;
 
-    std::cout << "You entered : " << GuessA << "  " << GuessB <<"  " << GuessC << std::endl;
+    std::cout << "You entered : " << GuessA << "  " << GuessB <<"  " << GuessC << "\n";
 
     int GuessSum = GuessA + GuessB + GuessC;
     int GuessProduct = GuessA * GuessB * GuessC;
@@ -37,12 +37,37 @@ int main()
 
     if(GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
-        std::cout << "You Win!";
+        std::cout << "\nCongrautlations!!! You Win!";
+        return true;
     }
     else
     {
-        std::cout << "You Lose!";
+        std::cout << "\n***You entered the wrong code! Careful agetn! Try again!***\n";
+        return false;
     }
+
+}
+
+int main()
+{
+
+    int LevelDifficulty = 1;
+    const int MaxDifficulty = 5;
     
+    //Loop game unitl all levels are completed
+    while (LevelDifficulty <= MaxDifficulty)
+    {
+        bool bLevelComplete = PlayGame(LevelDifficulty);
+        std::cin.clear();   //Clears any erros
+        std::cin.ignore();  //Discards the buffer
+
+        if (bLevelComplete)
+        {
+            //Code to increase the difficulty level
+            LevelDifficulty++;
+        }
+    }
+
+    std::out << "\n***Great work agent! You got all the files! Now get out of there!***\n"
     return 0;
 }
