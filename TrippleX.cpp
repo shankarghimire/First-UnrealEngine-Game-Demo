@@ -1,4 +1,5 @@
 #include<iostream>
+#include<ctime>
 using namespace std;
 void PrintIntroduction(int Difficulty)
 {
@@ -10,9 +11,9 @@ bool PlayGame( int LevelDifficulty)
   
     PrintIntroduction(LevelDifficulty);
     //Declareing 3 codes
-    const int CodeA = 4;
-    const int CodeB = 3;
-    const int CodeC = 2;
+    const int CodeA = rand() % LevelDifficulty + LevelDifficulty ;
+    const int CodeB = rand() % LevelDifficulty + LevelDifficulty ;
+    const int CodeC = rand() % LevelDifficulty + LevelDifficulty ;
 
     int CodeSum =  CodeA + CodeB + CodeC;
 
@@ -37,7 +38,7 @@ bool PlayGame( int LevelDifficulty)
 
     if(GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
-        std::cout << "\nCongrautlations!!! You Win!";
+        std::cout << "\n***Well done agent! You have extracted a file! Keep going!***";
         return true;
     }
     else
@@ -50,6 +51,7 @@ bool PlayGame( int LevelDifficulty)
 
 int main()
 {
+    srand(time(NULL));
 
     int LevelDifficulty = 1;
     const int MaxDifficulty = 5;
@@ -64,10 +66,10 @@ int main()
         if (bLevelComplete)
         {
             //Code to increase the difficulty level
-            LevelDifficulty++;
+            ++LevelDifficulty;
         }
     }
 
-    std::out << "\n***Great work agent! You got all the files! Now get out of there!***\n"
+    std::cout << "\n***Great work agent! You got all the files! Now get out of there!***\n";
     return 0;
 }
